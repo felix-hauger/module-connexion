@@ -1,18 +1,15 @@
 <?php
 
-require('functions/connect.php');
-
 if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
 
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+    
     $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
     
-    if ($id->query($sql)) {
-        echo 'Insertion complete! ';
-    } else {
-        echo 'Error: ' . $id->error;
-    }
-
-    mysqli_close($id);
+    require('functions/connect.php');
 }
 
 ?>
