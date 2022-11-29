@@ -1,5 +1,26 @@
 <?php
 session_start();
+
+if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
+
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+
+    $id = new mysqli('localhost', 'root', '', 'moduleconnexion');
+
+    // $query = mysqli_query($id, 'INSERT INTO `users` (`firstname`, `lastname`, `login`, `password`) VALUES ('. `$_POST['firstname']` .', ' . `$_POST['lastname']` . ', ' . `$_POST['login']` . ', '. `$_POST['password']` . ')');
+
+    $query = 'INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('. $firstname . ', ' . $lastname . ', ' . $login . ', ' . $password . ')';
+
+    // if ($id→errno) {
+    //     printf("Could not insert record into table: %s<br />", $id→error);
+    // }
+    
+    $id→close();
+}
+
 ?>
 <h1>Inscription</h1>
 <form action="" method="post">
