@@ -3,9 +3,9 @@
 $id = new mysqli('localhost', 'root', '', 'moduleconnexion');
 
 if ($id->query($sql)) {
-    echo 'Insertion complete! ';
+    echo 'Action complete! ';
 } else {
     echo 'Error: ' . $id->error;
 }
 
-mysqli_close($id);
+// mysqli_close($id);

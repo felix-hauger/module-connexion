@@ -1,15 +1,26 @@
 <?php
 
 if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
-
+    
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $login = $_POST['login'];
     $password = $_POST['password'];
     
+    // $sql = "SELECT login FROM users";
+    // require('functions/connect.php');
+
+    // var_dump($id->fetch_all($sql));
+
     $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
     
     require('functions/connect.php');
+    if ($id->query($sql)) {
+        echo 'Insertion complete! ';
+        header('Location: login.php');
+    } else {
+        echo 'Error: ' . $id->error;
+    }
 }
 
 ?>
@@ -19,6 +30,7 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
         <tr>
             <td><label for="firstname">Prénom</label></td>
             <td><input type="text" name="firstname" id="firstname"></td>
+            <?php  /* Ajouter conditons pour exceptions */?>
         </tr>
         <tr>
             <td><label for="lastname">Nom de Famille</label></td>
