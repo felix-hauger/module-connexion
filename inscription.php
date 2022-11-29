@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
 
