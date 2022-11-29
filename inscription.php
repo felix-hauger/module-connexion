@@ -9,15 +9,15 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 
     $id = new mysqli('localhost', 'root', '', 'moduleconnexion');
 
-    // $query = mysqli_query($id, 'INSERT INTO `users` (`firstname`, `lastname`, `login`, `password`) VALUES ('. `$_POST['firstname']` .', ' . `$_POST['lastname']` . ', ' . `$_POST['login']` . ', '. `$_POST['password']` . ')');
-
-    $query = 'INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('. $firstname . ', ' . $lastname . ', ' . $login . ', ' . $password . ')';
-
-    // if ($id→errno) {
-    //     printf("Could not insert record into table: %s<br />", $id→error);
-    // }
+    $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
     
-    $id→close();
+    if ($id->query($sql)) {
+        echo 'Insertion complete! ';
+    } else {
+        echo 'Error: ' . $id->error;
+    }
+
+    mysqli_close($id);
 }
 
 ?>
