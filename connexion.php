@@ -2,58 +2,42 @@
 
 if (!empty($_POST['login']) && !empty($_POST['password'])) {
     require_once('functions/connect.php');
+    require_once('functions/is_user_in_db.php');
 
     $input_login = $_POST['login'];
     $input_password = $_POST['password'];
 
-    // $input_login = 'admin';
-    // $input_password = 'admin';
-    
-    $sql = "SELECT login FROM users";
-    
-    $query = $id->query($sql);
-    
-    $row = $query->fetch_assoc();
-    
-    while ($row != null) {
-        // var_dump($row);
+
+    $is_user_in_db = is_user_in_db($input_login, $id);
+    var_dump($is_user_in_db);
+    if ($is_user_in_db) {
+        echo 'le login ' . $input_login . ' est dans la base de données<br>';
         
-        // Test if input login exists in database
-        foreach ($row as $db_login) {
-            // var_dump($key);
-            // var_dump($login);
-            $is_user_in_db = false;
-            if ($input_login === $db_login) {
-                echo 'le login ' . $input_login . ' est dans la base de données<br>';
-                
-                $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
-                
-                $query = $id->query($sql);
-    
-                $row_user_login_password = $query->fetch_assoc();
-    
-                if ($row_user_login_password['password'] === $input_password) {
+        $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
+        
+        $query = $id->query($sql);
 
-                    session_start();
-                    $_SESSION['is_logged'] = true;
-                    $_SESSION['logged_user'] = $db_login;
+        $row_user_login_password = $query->fetch_assoc();
+        $db_login = $row_user_login_password['login'];
+        $db_password = $row_user_login_password['password'];
 
-                    echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
-                    header('Location: index.php');
-                    
-                } else {
-                    echo 'mot de passe incorrect';
-                }
-                var_dump($row_user_login_password);
+        if ($row_user_login_password['password'] === $input_password) {
 
-                $is_user_in_db = true;
-                break;
-    
-            } 
+            session_start();
+            $_SESSION['is_logged'] = true;
+            $_SESSION['logged_user'] = $db_login;
+
+            echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
+            header('Location: index.php');
+            
+        } else {
+            echo 'mot de passe incorrect';
         }
-        $row = $query->fetch_assoc();
-    
-    }
+        var_dump($row_user_login_password);
+
+
+    } 
+
     if (!$is_user_in_db) {
         echo 'L\'utilisateur n\'existe pas.';
     }
