@@ -72,7 +72,7 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
             <td><input type="password" name="password" id="password"></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Inscription"></td>
+            <td colspan="2"><input type="submit" value="Connexion"></td>
         </tr>
     </table>
 </form>
