@@ -1,53 +1,61 @@
 <?php
 
 if (!empty($_POST['login']) && !empty($_POST['password'])) {
+    require_once('functions/connect.php');
+
     $input_login = $_POST['login'];
     $input_password = $_POST['password'];
 
-}
-require_once('functions/connect.php');
-
-$login = 'admin';
-$password = 'admin';
-
-$sql = "SELECT login FROM users";
-
-$query = $id->query($sql);
-
-$row = $query->fetch_assoc();
-
-while ($row != null) {
-    // var_dump($row);
-    foreach ($row as $db_login) {
-        // var_dump($key);
-        // var_dump($login);
-        if ($login === $db_login) {
-            echo 'le login ' . $login . ' est dans la base de données<br>';
-            
-            $sql = "SELECT login, password FROM users WHERE login LIKE '$login'";
-            
-            $query = $id->query($sql);
-
-            $row_user_login_password = $query->fetch_assoc();
-
-            if ($row_user_login_password['password'] === $password) {
-                echo 'utilisateur ' . $login . ' connecté !';
-            }
-            var_dump($row_user_login_password);
-
-        } else {
-            // echo 'le login ' . $login . ' n\'est pas dans la base de données<br>';
-            
-        }
-    }
+    // $input_login = 'admin';
+    // $input_password = 'admin';
+    
+    $sql = "SELECT login FROM users";
+    
+    $query = $id->query($sql);
+    
     $row = $query->fetch_assoc();
+    
+    while ($row != null) {
+        // var_dump($row);
+        foreach ($row as $db_login) {
+            // var_dump($key);
+            // var_dump($login);
+            $is_user_in_db = false;
+            if ($input_login === $db_login) {
+                echo 'le login ' . $input_login . ' est dans la base de données<br>';
+                
+                $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
+                
+                $query = $id->query($sql);
+    
+                $row_user_login_password = $query->fetch_assoc();
+    
+                if ($row_user_login_password['password'] === $input_password) {
+                    echo 'utilisateur ' . $input_login . ' connecté !';
+                } else {
+                    echo 'mot de passe incorrect';
+                }
+                var_dump($row_user_login_password);
 
+                $is_user_in_db = true;
+                break;
+    
+            } 
+        }
+        $row = $query->fetch_assoc();
+    
+    }
+    if (!$is_user_in_db) {
+        echo 'L\'utilisateur n\'existe pas.';
+    }
+} else {
+    echo 'Remplissez tous les champs !';
 }
 
 
 ?>
 
-<form action="index.php" method="post">
+<form action="" method="post">
     <table>
         <tr>
             <td><label for="login">Pseudo</label></td>
