@@ -1,30 +1,42 @@
 <?php
+// session_start();
 
-if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
+// $_SESSION['user_successfully_created'] = false;
+
+if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])&& !empty($_POST['password-confirmation'])) {
     require_once('functions/connect.php');
     
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $login = $_POST['login'];
     $password = $_POST['password'];
+    $password_confirmation = $_POST['password-confirmation'];
     
     // $sql = "SELECT login FROM users";
     // require('functions/connect.php');
 
     // var_dump($id->fetch_all($sql));
 
-    $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
-    
-    
-    if ($id->query($sql)) {
-        echo 'Insertion complete! ';
-        header('Location: connexion.php');
+    if ($password === $password_confirmation) {
+        $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
+        
+        
+        if ($id->query($sql)) {
+            echo 'Insertion complete! ';
+            header('Location: connexion.php');
+        } else {
+            echo 'Error: ' . $id->error;
+        }
+
     } else {
-        echo 'Error: ' . $id->error;
+        echo 'Valeurs non identiques dans les champs de mot de passe';
     }
+
 }
 
 ?>
+
+
 <h1>Inscription</h1>
 <form action="" method="post">
     <table>
@@ -44,6 +56,10 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
         <tr>
             <td><label for="password">Mot de Passe</label></td>
             <td><input type="password" name="password" id="password"></td>
+        </tr>
+        <tr>
+            <td><label for="password-confirmation">Confirmation du Mot de Passe</label></td>
+            <td><input type="password" name="password-confirmation" id="password-confirmation"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Inscription"></td>
