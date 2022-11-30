@@ -17,6 +17,8 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
     
     while ($row != null) {
         // var_dump($row);
+        
+        // Test if input login exists in database
         foreach ($row as $db_login) {
             // var_dump($key);
             // var_dump($login);
@@ -31,7 +33,11 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
                 $row_user_login_password = $query->fetch_assoc();
     
                 if ($row_user_login_password['password'] === $input_password) {
-                    echo 'utilisateur ' . $input_login . ' connecté !';
+                    session_start();
+                    $_SESSION['is_logged'] = true;
+                    $_SESSION['logged_user'] = $db_login;
+                    echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
+                    header('Location: index.php');
                 } else {
                     echo 'mot de passe incorrect';
                 }
