@@ -5,44 +5,25 @@
 
 if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])&& !empty($_POST['password-confirmation'])) {
     require_once('functions/connect.php');
+    require_once('functions/is_user_in_db.php');
     
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-    $password_confirmation = $_POST['password-confirmation'];
+    $input_firstname = $_POST['firstname'];
+    $input_lastname = $_POST['lastname'];
+    $input_login = $_POST['login'];
+    $input_password = $_POST['password'];
+    $input_password_confirmation = $_POST['password-confirmation'];
     
-    // $sql = "SELECT login FROM users";
-    // require('functions/connect.php');
 
-    // var_dump($id->fetch_all($sql));
-
-    if ($password === $password_confirmation) {
+    if ($input_password === $input_password_confirmation) {
         
-        // Test if login exists in database
-        $sql = "SELECT login FROM users";
-
-        $query = $id->query($sql);
-    
-        $row = $query->fetch_assoc();
-
-        while ($row != null) {
-            $is_user_in_db = false;
-
-            foreach ($row as $db_login) {
-                if ($login === $db_login) {
-                    $is_user_in_db = true;
-                    break;
-                }
-            }
-            $row = $query->fetch_assoc();
-
-        }
+        // test if user in db, from the required function
+        $is_user_in_db = is_user_in_db($input_login, $id);
 
         if ($is_user_in_db) {
             echo 'L\'utilisateur existe déjà !';
         } else {
-            $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
+            
+            $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$input_firstname', '$input_lastname', '$input_login', '$input_password')";
             
             
             if ($id->query($sql)) {
