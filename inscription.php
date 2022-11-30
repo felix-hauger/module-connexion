@@ -18,7 +18,7 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
     
     if ($id->query($sql)) {
         echo 'Insertion complete! ';
-        header('Location: login.php');
+        header('Location: connexion.php');
     } else {
         echo 'Error: ' . $id->error;
     }
