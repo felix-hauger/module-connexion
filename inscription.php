@@ -1,6 +1,7 @@
 <?php
 
 if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])) {
+    require_once('functions/connect.php');
     
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -14,7 +15,7 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 
     $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
     
-    require('functions/connect.php');
+    
     if ($id->query($sql)) {
         echo 'Insertion complete! ';
         header('Location: login.php');

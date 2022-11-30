@@ -5,13 +5,14 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
     $input_password = $_POST['password'];
 
 }
+require_once('functions/connect.php');
 
 $login = 'admin';
 $password = 'admin';
 
 $sql = "SELECT login FROM users";
 
-require('functions/connect.php');
+$query = $id->query($sql);
 
 $row = $query->fetch_assoc();
 
@@ -24,8 +25,8 @@ while ($row != null) {
             echo 'le login ' . $login . ' est dans la base de données<br>';
             
             $sql = "SELECT login, password FROM users WHERE login LIKE '$login'";
-
-            require('functions/connect.php');
+            
+            $query = $id->query($sql);
 
             $row_user_login_password = $query->fetch_assoc();
 
