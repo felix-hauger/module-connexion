@@ -33,11 +33,14 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
                 $row_user_login_password = $query->fetch_assoc();
     
                 if ($row_user_login_password['password'] === $input_password) {
+
                     session_start();
                     $_SESSION['is_logged'] = true;
                     $_SESSION['logged_user'] = $db_login;
+
                     echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
                     header('Location: index.php');
+                    
                 } else {
                     echo 'mot de passe incorrect';
                 }

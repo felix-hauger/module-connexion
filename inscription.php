@@ -18,14 +18,39 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
     // var_dump($id->fetch_all($sql));
 
     if ($password === $password_confirmation) {
-        $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
         
-        
-        if ($id->query($sql)) {
-            echo 'Insertion complete! ';
-            header('Location: connexion.php');
+        // Test if login exists in database
+        $sql = "SELECT login FROM users";
+
+        $query = $id->query($sql);
+    
+        $row = $query->fetch_assoc();
+
+        while ($row != null) {
+            $is_user_in_db = false;
+
+            foreach ($row as $db_login) {
+                if ($login === $db_login) {
+                    $is_user_in_db = true;
+                    break;
+                }
+            }
+            $row = $query->fetch_assoc();
+
+        }
+
+        if ($is_user_in_db) {
+            echo 'L\'utilisateur existe déjà !';
         } else {
-            echo 'Error: ' . $id->error;
+            $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$firstname', '$lastname', '$login', '$password')";
+            
+            
+            if ($id->query($sql)) {
+                echo 'Insertion complete! ';
+                header('Location: connexion.php');
+            } else {
+                echo 'Error: ' . $id->error;
+            }
         }
 
     } else {
