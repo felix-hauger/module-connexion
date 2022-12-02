@@ -65,9 +65,10 @@ if (isset($_POST['submit'])) {
         if ($id->query($sql)) {
             echo 'Update complete! ';
 
-            // if the condition is realized the table is updated with the value of $input_login, therefore it is not needed to fetch a new query
+            // if the condition is realized the table is updated with the value of $input_login, 
+            // therefore it is not needed to fetch a new query to update the session variable
             $_SESSION['logged_user'] = $input_login;
-            
+
             // we need however to redirect to update the inputs informations
             header('Location: profil.php');
 
