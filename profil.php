@@ -2,6 +2,8 @@
 session_start();
 
 require_once('functions/connect.php');
+require_once('functions/is_user_in_db.php');
+
 var_dump($_SESSION);
 $logged_user = $_SESSION['logged_user'];
 
@@ -19,6 +21,63 @@ $db_lastname = $user_infos['lastname'];
 $db_login = $user_infos['login'];
 $db_password = $user_infos['password'];
 
+if (isset($_POST['submit'])) {
+
+    if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])&& !empty($_POST['password-confirmation'])) {
+        
+        $inputs_ok = true;
+    
+        $input_firstname = $_POST['firstname'];
+        $input_lastname = $_POST['lastname'];
+        $input_login = $_POST['login'];
+        $input_password = $_POST['password'];
+        $input_password_confirmation = $_POST['password-confirmation'];
+        
+    
+        // test if user in db, from the required function
+        $is_user_in_db = is_user_in_db($input_login, $id);
+        
+        if (!$is_user_in_db) {
+            $login_ok = true;
+        } else {
+            $login_ok = false;
+            $login_error = 'L\'utilisateur existe déjà !';
+        }
+        
+        if ($input_password === $input_password_confirmation) {
+            $password_ok = true;
+        } else {
+            $password_ok = false;
+            $password_error = 'Valeurs non identiques dans les champs de mot de passe';
+        }
+    
+    } else {
+        $inputs_ok = false;
+        $inputs_error = 'Remplissez tous les champs !';
+    }
+    
+    
+    if ($inputs_ok && $login_ok && $password_ok) {
+        
+        $sql = "UPDATE users SET `firstname` = '$input_firstname', `lastname` = '$input_lastname', `login` = '$input_login', `password` = '$input_password' WHERE login LIKE '$db_login'";
+        
+        
+        if ($id->query($sql)) {
+            echo 'Update complete! ';
+
+            // if the condition is realized the table is updated with the value of $input_login, therefore it is not needed to fetch a new query
+            $_SESSION['logged_user'] = $input_login;
+            
+            // we need however to redirect to update the inputs informations
+            header('Location: profil.php');
+
+        } else {
+            echo 'Error: ' . $id->error;
+        }
+    }
+
+}
+// session_destroy();
 ?>
 
 <h1>Profil</h1>
@@ -55,7 +114,7 @@ $db_password = $user_infos['password'];
             <td><input type="password" name="password-confirmation" id="password-confirmation" value="<?php  ?>"></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Inscription"></td>
+            <td colspan="2"><input type="submit" name="submit" value="Modifier"></td>
         </tr>
     </table>
 </form>
