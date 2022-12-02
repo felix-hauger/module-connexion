@@ -1,54 +1,57 @@
 <?php
 
-if (!empty($_POST['login']) && !empty($_POST['password'])) {
-    require_once('functions/connect.php');
-    require_once('functions/is_user_in_db.php');
+if (isset($_POST['submit'])) {
 
-    $input_login = $_POST['login'];
-    $input_password = $_POST['password'];
-
-    // test if user in db, from the required function
-    $is_user_in_db = is_user_in_db($input_login, $id);
-
-    if ($is_user_in_db) {
-        echo 'le login ' . $input_login . ' est dans la base de données<br>';
-        
-        $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
-        
-        $query = $id->query($sql);
-
-        // get login & password from db in associative array
-        $row_user_login_password = $query->fetch_assoc();
-        $db_login = $row_user_login_password['login'];
-        $db_password = $row_user_login_password['password'];
-
-        // log in if matching password
-        if ($row_user_login_password['password'] === $input_password) {
-
-            session_start();
+    if (!empty($_POST['login']) && !empty($_POST['password'])) {
+        require_once('functions/connect.php');
+        require_once('functions/is_user_in_db.php');
+    
+        $input_login = $_POST['login'];
+        $input_password = $_POST['password'];
+    
+        // test if user in db, from the required function
+        $is_user_in_db = is_user_in_db($input_login, $id);
+    
+        if ($is_user_in_db) {
+            echo 'le login ' . $input_login . ' est dans la base de données<br>';
             
-            // to display log out button
-            $_SESSION['is_logged'] = true;
+            $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
             
-            // to display profil.php infos & admin link / page if logged as admin
-            $_SESSION['logged_user'] = $db_login;
-
-            echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
-            header('Location: index.php');
-
-            die();
-            
-        } else {
-            echo 'mot de passe incorrect';
+            $query = $id->query($sql);
+    
+            // get login & password from db in associative array
+            $row_user_login_password = $query->fetch_assoc();
+            $db_login = $row_user_login_password['login'];
+            $db_password = $row_user_login_password['password'];
+    
+            // log in if matching password
+            if ($row_user_login_password['password'] === $input_password) {
+    
+                session_start();
+                
+                // to display log out button
+                $_SESSION['is_logged'] = true;
+                
+                // to display profil.php infos & admin link / page if logged as admin
+                $_SESSION['logged_user'] = $db_login;
+    
+                echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
+                header('Location: index.php');
+    
+                die();
+                
+            } else {
+                echo 'mot de passe incorrect';
+            }
+    
         }
-
+    
+        if (!$is_user_in_db) {
+            echo 'L\'utilisateur n\'existe pas.';
+        }
+    } else {
+        echo 'Remplissez tous les champs !';
     }
-
-    if (!$is_user_in_db) {
-        echo 'L\'utilisateur n\'existe pas.';
-    }
-} else {
-    echo 'Remplissez tous les champs !';
 }
 
 
@@ -65,7 +68,7 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
             <td><input type="password" name="password" id="password"></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Connexion"></td>
+            <td colspan="2"><input type="submit" name="submit" value="Connexion"></td>
         </tr>
     </table>
 </form>
