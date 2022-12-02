@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         $is_user_in_db = is_user_in_db($input_login, $id);
     
         if ($is_user_in_db) {
-            echo 'le login ' . $input_login . ' est dans la base de données<br>';
+            // echo 'le login ' . $input_login . ' est dans la base de données<br>';
             
             $sql = "SELECT login, password FROM users WHERE login LIKE '$input_login'";
             
@@ -41,16 +41,16 @@ if (isset($_POST['submit'])) {
                 die();
                 
             } else {
-                echo 'mot de passe incorrect';
+                // if password is incorrect
+                $login_error = 'Identifiants incorrects.';
             }
     
-        }
-    
-        if (!$is_user_in_db) {
-            echo 'L\'utilisateur n\'existe pas.';
+        } else {
+            // if user is NOT in db
+            $login_error = 'Identifiants incorrects.';
         }
     } else {
-        echo 'Remplissez tous les champs !';
+        $inputs_error = 'Remplissez tous les champs !';
     }
 }
 
@@ -67,8 +67,14 @@ if (isset($_POST['submit'])) {
             <td><label for="password">Mot de Passe</label></td>
             <td><input type="password" name="password" id="password"></td>
         </tr>
+        <?php if (isset($login_error)): ?>
+        <tr><td class="error_msg"><?= $login_error ?></td></tr>
+        <?php endif; ?>
         <tr>
             <td colspan="2"><input type="submit" name="submit" value="Connexion"></td>
         </tr>
+        <?php if (isset($inputs_error)): ?>
+            <tr><td class="error_msg"><?= $inputs_error ?></td></tr>
+        <?php endif; ?>
     </table>
 </form>
