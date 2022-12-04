@@ -23,10 +23,15 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+    /* blur behind the element */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    -moz-backdrop-filter: blur(2px);
 }
 
 header * {
-    color: #fff;
+    color: #00B383;
 }
 
 header h1 {
@@ -44,6 +49,11 @@ header nav a {
     text-decoration: none;
     font-size: 1.3em;
     margin-right: 30px;
+}
+
+header nav a:hover {
+    color: #fff;
+    text-shadow: 1px 1px 6px #fff;
 }
 
 main {
