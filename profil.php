@@ -6,7 +6,7 @@ require_once('functions/connect.php');
 require_once('functions/is_user_in_db.php');
 require_once('elements/header.php');
 
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 if (!isset($_SESSION['is_logged'])) {
     header('Location: connexion.php');
@@ -22,7 +22,7 @@ $query = $id->query($sql);
 
 $user_infos = $query->fetch_assoc();
 
-var_dump($user_infos);
+// var_dump($user_infos);
 
 $db_firstname = $user_infos['firstname'];
 $db_lastname = $user_infos['lastname'];
