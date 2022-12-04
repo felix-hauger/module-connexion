@@ -23,11 +23,20 @@ if (session_status() === PHP_SESSION_NONE) {
     <nav>
         <ul>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="connexion.php">Connexion</a></li>
-            <li><a href="inscription.php">Inscription</a></li>
-            <li><a href="profil.php">Profil</a></li>
+
+            <?php if (isset($_SESSION['is_logged'])): ?>
+                <li><a href="profil.php">Profil</a></li>
+                <li><a href="deconnexion.php">Déconnexion</a></li>
+
+            <?php else: ?>
+                <li><a href="connexion.php">Connexion</a></li>
+                <li><a href="inscription.php">Inscription</a></li>
+                
+            <?php endif ?>
+
+            <?php if (isset($_SESSION['is_logged']) && $_SESSION['logged_user'] === 'admin'): ?>
             <li><a href="admin.php">Admin</a></li>
-            <li><a href="deconnexion.php">Déconnexion</a></li>
+            <?php endif ?>
         </ul>
     </nav>
 </header>
