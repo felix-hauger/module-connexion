@@ -4,8 +4,13 @@ session_start();
 
 // var_dump($_SESSION);
 
+if (!isset($_SESSION['is_logged'])) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
 if ($_SESSION['logged_user'] != 'admin') {
-    header('Location: connexion.php');
+    header('HTTP/1.0 403 Forbidden');
     die();
 }
 
