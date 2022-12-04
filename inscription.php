@@ -62,42 +62,43 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-
-<h1>Inscription</h1>
-<form action="" method="post">
-    <table>
-        <tr>
-            <td><label for="firstname">Prénom</label></td>
-            <td><input type="text" name="firstname" id="firstname"></td>
-        </tr>
-        <tr>
-            <td><label for="lastname">Nom de Famille</label></td>
-            <td><input type="text" name="lastname" id="lastname"></td>
-        </tr>
-        <tr>
-            <td><label for="login">Pseudo</label></td>
-            <td><input type="text" name="login" id="login"></td>
-            <?php if (isset($login_error)): ?>
-            <td class="error_msg"><?= $login_error ?></td>
+<main>
+    <h1>Inscription</h1>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td><label for="firstname">Prénom</label></td>
+                <td><input type="text" name="firstname" id="firstname"></td>
+            </tr>
+            <tr>
+                <td><label for="lastname">Nom de Famille</label></td>
+                <td><input type="text" name="lastname" id="lastname"></td>
+            </tr>
+            <tr>
+                <td><label for="login">Pseudo</label></td>
+                <td><input type="text" name="login" id="login"></td>
+                <?php if (isset($login_error)): ?>
+                <td class="error_msg"><?= $login_error ?></td>
+                <?php endif; ?>
+            </tr>
+            <tr>
+                <td><label for="password">Mot de Passe</label></td>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <tr>
+                <td><label for="password-confirmation">Confirmation du Mot de Passe</label></td>
+                <td><input type="password" name="password-confirmation" id="password-confirmation"></td>
+                <?php if (isset($password_error)): ?>
+                <td class="error_msg"><?= $password_error ?></td>
+                <?php endif; ?>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Inscription" name="submit"></td>
+            </tr>
+            <?php if (isset($inputs_error)): ?>
+            <tr><td class="error_msg"><?= $inputs_error ?></td></tr>
             <?php endif; ?>
-        </tr>
-        <tr>
-            <td><label for="password">Mot de Passe</label></td>
-            <td><input type="password" name="password" id="password"></td>
-        </tr>
-        <tr>
-            <td><label for="password-confirmation">Confirmation du Mot de Passe</label></td>
-            <td><input type="password" name="password-confirmation" id="password-confirmation"></td>
-            <?php if (isset($password_error)): ?>
-            <td class="error_msg"><?= $password_error ?></td>
-            <?php endif; ?>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Inscription" name="submit"></td>
-        </tr>
-        <?php if (isset($inputs_error)): ?>
-        <tr><td class="error_msg"><?= $inputs_error ?></td></tr>
-        <?php endif; ?>
-        
-    </table>
-</form>
+            
+        </table>
+    </form>
+</main>
