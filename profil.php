@@ -45,11 +45,13 @@ if (isset($_POST['submit'])) {
         // test if user in db, from the required function
         $is_user_in_db = is_user_in_db($input_login, $id);
         
-        if (!$is_user_in_db) {
-            $login_ok = true;
-        } else {
-            $login_ok = false;
-            $login_error = 'L\'utilisateur existe déjà !';
+        $login_ok = true;
+        // add a test if user does not wish to change login
+        if ($input_login != $db_login) {
+            if ($is_user_in_db) {
+                $login_ok = false;
+                $login_error = 'L\'utilisateur existe déjà !';
+            }
         }
         
         if ($input_password === $input_password_confirmation) {
