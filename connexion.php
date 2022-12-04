@@ -1,4 +1,5 @@
 <?php
+require_once('elements/header.php');
 
 if (isset($_POST['submit'])) {
 
@@ -34,9 +35,16 @@ if (isset($_POST['submit'])) {
                 
                 // to display profil.php infos & admin link / page if logged as admin
                 $_SESSION['logged_user'] = $db_login;
-    
-                echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
-                header('Location: index.php');
+
+                $logged_user = $_SESSION['logged_user'];
+                
+                if ($logged_user === 'admin') {
+                    header('Location: admin.php');
+                } else {
+                    echo 'utilisateur ' . $_SESSION['logged_user'] . ' connecté !';
+                    header('Location: index.php');
+                }
+
     
                 die();
                 
