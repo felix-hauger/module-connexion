@@ -2,8 +2,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+
+h1, h2, h3, p {
+    cursor: default;
+}
+
+:root {
+    --glass-color: rgba(255, 255, 255, .3);
+    --shadow-color: rgba(0, 0, 0, .2);
+}
 
 header {
     position: absolute;
@@ -13,7 +23,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, .2);
 }
 
 header * {
@@ -43,4 +52,87 @@ main {
     width: 100vw;
     background-image: url(../img/backiee-80478-landscape-1920x1080.jpg);
     background-size: cover;
+}
+
+main .form-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 4em;
+}
+
+main .form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--glass-color);
+    padding: 3rem 6rem;
+    border-radius: 20px;
+    border-left: 1px solid var(--glass-color);
+    border-top: 1px solid var(--glass-color);
+
+    /* blur behind the element */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+
+    /* box-shadow: x y blur spread */
+    box-shadow: 20px 20px 40px -6px var(--shadow-color);
+    text-align: center;
+    
+}
+
+main .form-container form h2 {
+    color: #fff;
+    /* font-weight: 500; */
+    opacity: .9;
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+main .form-container form input {
+    display: block;
+    background-color: transparent;
+    border: none;
+    border-left: 1px solid var(--glass-color);
+    border-top: 1px solid var(--glass-color);
+    padding: 1rem;
+    border-radius: 50px;
+
+    /* blur behind the element */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+
+    /* box-shadow: x y blur spread */
+    box-shadow: 4px 4px 60px var(--shadow-color);
+    color: #fff;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    transition: all .3s;
+    margin-bottom: 2em;
+    font-weight: 600;
+}
+
+main .form-container form input[type='text'],
+main .form-container form input[type='password'] {
+    font-size: 1rem;
+    
+}
+
+main .form-container form input:hover,
+main .form-container form input[type='text']:focus,
+main .form-container form input[type='password']:focus {
+    background-color: rgba(255, 255, 255, .1);
+    box-shadow: 4px 4px 60px 8px var(--shadow-color);
+}
+
+main .form-container form input[type='submit'] {
+    cursor: pointer;
+    margin-top: 1em;
+    font-size: 1.5rem;
+    width: fit-content;
+}
+
+main .form-container form input ::placeholder {
+    color: #fff;
 }
