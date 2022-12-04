@@ -30,14 +30,10 @@ $row = $query->fetch_assoc();
         <table>
             <thead>
                 <tr>
-                    <?php
-                    echo '<table><thead><tr>';
-        
+                    <?php        
                     foreach ($row as $key => $value) {
                         echo '<th>' . $key . '</th>';
                     }
-        
-                    echo '</tr></thead><tbody>';
                     ?>
                 </tr>
             </thead>
