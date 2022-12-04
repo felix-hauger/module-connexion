@@ -6,5 +6,5 @@ require_once('elements/header.php');
 ?>
 
 <main>
-    <h1>Bonjour <?php echo isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 'invité'; ?></h1>
+    <h2 id="index-title" >Bonjour <?= isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 'voyageur en herbe !'; ?></h2>
 </main>
