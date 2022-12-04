@@ -10,6 +10,7 @@ var_dump($_SESSION);
 
 if ($_SESSION['logged_user'] != 'admin') {
     header('Location: connexion.php');
+    die();
 }
 
 $sql = "SELECT id, firstname, lastname, login, password FROM users";
