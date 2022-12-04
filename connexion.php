@@ -64,25 +64,26 @@ if (isset($_POST['submit'])) {
 
 
 ?>
-
-<form action="" method="post">
-    <table>
-        <tr>
-            <td><label for="login">Pseudo</label></td>
-            <td><input type="text" name="login" id="login"></td>
-        </tr>
-        <tr>
-            <td><label for="password">Mot de Passe</label></td>
-            <td><input type="password" name="password" id="password"></td>
-        </tr>
-        <?php if (isset($login_error)): ?>
-        <tr><td class="error_msg"><?= $login_error ?></td></tr>
-        <?php endif; ?>
-        <tr>
-            <td colspan="2"><input type="submit" name="submit" value="Connexion"></td>
-        </tr>
-        <?php if (isset($inputs_error)): ?>
-            <tr><td class="error_msg"><?= $inputs_error ?></td></tr>
-        <?php endif; ?>
-    </table>
-</form>
+<main>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td><label for="login">Pseudo</label></td>
+                <td><input type="text" name="login" id="login"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Mot de Passe</label></td>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <?php if (isset($login_error)): ?>
+            <tr><td class="error_msg"><?= $login_error ?></td></tr>
+            <?php endif; ?>
+            <tr>
+                <td colspan="2"><input type="submit" name="submit" value="Connexion"></td>
+            </tr>
+            <?php if (isset($inputs_error)): ?>
+                <tr><td class="error_msg"><?= $inputs_error ?></td></tr>
+            <?php endif; ?>
+        </table>
+    </form>
+</main>

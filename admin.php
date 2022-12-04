@@ -19,34 +19,36 @@ $query = $id->query($sql);
 $row = $query->fetch_assoc();
 ?>
 
-<table>
-    <thead>
-        <tr>
+<main>
+    <table>
+        <thead>
+            <tr>
+                <?php
+                echo '<table><thead><tr>';
+    
+                foreach ($row as $key => $value) {
+                    echo '<th>' . $key . '</th>';
+                }
+    
+                echo '</tr></thead><tbody>';
+                ?>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-            echo '<table><thead><tr>';
-
-            foreach ($row as $key => $value) {
-                echo '<th>' . $key . '</th>';
+            while ($row != null) {
+    
+                echo '<tr>';
+    
+                foreach ($row as $value) {
+                    echo '<td>' . $value . '</td>';
+                }
+    
+                echo '</tr>';
+    
+                $row = $query->fetch_assoc();
             }
-
-            echo '</tr></thead><tbody>';
             ?>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        while ($row != null) {
-
-            echo '<tr>';
-
-            foreach ($row as $value) {
-                echo '<td>' . $value . '</td>';
-            }
-
-            echo '</tr>';
-
-            $row = $query->fetch_assoc();
-        }
-        ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</main>
