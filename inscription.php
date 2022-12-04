@@ -4,6 +4,7 @@
 // $_SESSION['user_successfully_created'] = false;
 require_once('functions/connect.php');
 require_once('functions/is_user_in_db.php');
+require_once('elements/header.php');
 
 // add test for submit
 

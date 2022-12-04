@@ -3,6 +3,8 @@ session_start();
 
 require_once('functions/connect.php');
 require_once('functions/is_user_in_db.php');
+require_once('elements/header.php');
+
 
 var_dump($_SESSION);
 
