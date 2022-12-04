@@ -127,6 +127,7 @@ main .form-container form input {
     transition: all .3s;
     margin-top: 2em;
     font-weight: 600;
+    outline-color: rgba(50, 50, 50, .3);
 }
 
 main .form-container form input[type='text'],
