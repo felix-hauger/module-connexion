@@ -10,6 +10,7 @@ var_dump($_SESSION);
 
 if (!isset($_SESSION['is_logged'])) {
     header('Location: connexion.php');
+    die();
 }
 
 $logged_user = $_SESSION['logged_user'];
