@@ -35,11 +35,11 @@ if (isset($_POST['submit'])) {
         
         $inputs_ok = true;
     
-        $input_firstname = $_POST['firstname'];
-        $input_lastname = $_POST['lastname'];
-        $input_login = $_POST['login'];
-        $input_password = $_POST['password'];
-        $input_password_confirmation = $_POST['password-confirmation'];
+        $input_firstname = htmlspecialchars(trim($_POST['firstname']), ENT_QUOTES, "UTF-8");
+        $input_lastname = htmlspecialchars(trim($_POST['lastname']), ENT_QUOTES, "UTF-8");
+        $input_login = htmlspecialchars(trim($_POST['login']), ENT_QUOTES, "UTF-8");
+        $input_password = htmlspecialchars(trim($_POST['password']), ENT_QUOTES, "UTF-8");
+        $input_password_confirmation = htmlspecialchars(trim($_POST['password-confirmation']), ENT_QUOTES, "UTF-8");
         
     
         // test if user in db, from the required function
