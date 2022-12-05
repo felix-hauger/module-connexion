@@ -7,15 +7,13 @@ if (isset($_SESSION['is_logged'])) {
 }
 
 // $_SESSION['user_successfully_created'] = false;
-require_once('functions/connect.php');
-require_once('functions/is_user_in_db.php');
 require_once('elements/header.php');
 
-// add test for submit
-
 if (isset($_POST['submit'])) {
-
+    
     if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['login']) && !empty($_POST['password'])&& !empty($_POST['password-confirmation'])) {
+        require_once('functions/connect.php');
+        require_once('functions/is_user_in_db.php');
         
         $inputs_ok = true;
     
