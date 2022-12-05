@@ -46,7 +46,9 @@ if (isset($_POST['submit'])) {
     
     if ($inputs_ok && $login_ok && $password_ok) {
         
-        $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$input_firstname', '$input_lastname', '$input_login', '$input_password')";
+        $hashed_password = password_hash($input_password, PASSWORD_BCRYPT);
+
+        $sql = "INSERT INTO users (`firstname`, `lastname`, `login`, `password`) VALUES ('$input_firstname', '$input_lastname', '$input_login', '$hashed_password')";
         
         
         if ($id->query($sql)) {

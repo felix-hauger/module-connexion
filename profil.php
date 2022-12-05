@@ -68,8 +68,11 @@ if (isset($_POST['submit'])) {
     
     
     if ($inputs_ok && $login_ok && $password_ok) {
+
+        $hashed_password = password_hash($input_password, PASSWORD_BCRYPT);
+
         
-        $sql = "UPDATE users SET `firstname` = '$input_firstname', `lastname` = '$input_lastname', `login` = '$input_login', `password` = '$input_password' WHERE login LIKE '$db_login'";
+        $sql = "UPDATE users SET `firstname` = '$input_firstname', `lastname` = '$input_lastname', `login` = '$input_login', `password` = '$hashed_password' WHERE login LIKE '$db_login'";
         
         
         if ($id->query($sql)) {
