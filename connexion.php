@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
             $db_password = $row_user_login_password['password'];
     
             // log in if matching password
-            if ($row_user_login_password['password'] === $input_password) {
+            if (password_verify($input_password, $db_password)) {
     
                 session_start();
                 
