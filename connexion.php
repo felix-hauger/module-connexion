@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (isset($_SESSION['is_logged'])) {
+    header('Location: index.php');
+    die();
+}
+
 require_once('elements/header.php');
 
 if (isset($_POST['submit'])) {
