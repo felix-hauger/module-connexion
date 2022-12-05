@@ -63,29 +63,33 @@ if (isset($_POST['submit'])) {
 ?>
 
 <main>
-    <div class="form-container">
-        <form action="" method="post">
-            <h2>Inscription</h2>
-
-            <input type="text" name="firstname" id="firstname" placeholder="Votre Prénom">
-
-            <input type="text" name="lastname" id="lastname" placeholder="Votre Nom">
-
-            <input type="text" name="login" id="login" placeholder="Votre Identifiant">
-            <?php if (isset($login_error)): ?>
-            <p class="error_msg"><?= $login_error ?></p>
-            <?php endif; ?>
-
-            <input type="password" name="password" id="password" placeholder="Votre Mot de Passe">
-            <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirmation Mot de Passe">
-            <?php if (isset($password_error)): ?>
-            <p class="error_msg"><?= $password_error ?></p>
-            <?php endif; ?>
-
-            <input type="submit" value="Inscription" name="submit">
-            <?php if (isset($inputs_error)): ?>
-            <p class="error_msg"><?= $inputs_error ?></p>
-            <?php endif; ?>
-        </form>
+    <div class="hero">
+        <div class="form-container">
+            <form action="" method="post">
+                <h2>Inscription</h2>
+    
+                <input type="text" name="firstname" id="firstname" placeholder="Votre Prénom">
+    
+                <input type="text" name="lastname" id="lastname" placeholder="Votre Nom">
+    
+                <input type="text" name="login" id="login" placeholder="Votre Identifiant">
+                <?php if (isset($login_error)): ?>
+                <p class="error_msg"><?= $login_error ?></p>
+                <?php endif; ?>
+    
+                <input type="password" name="password" id="password" placeholder="Votre Mot de Passe">
+                <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirmation Mot de Passe">
+                <?php if (isset($password_error)): ?>
+                <p class="error_msg"><?= $password_error ?></p>
+                <?php endif; ?>
+    
+                <input type="submit" value="Inscription" name="submit">
+                <?php if (isset($inputs_error)): ?>
+                <p class="error_msg"><?= $inputs_error ?></p>
+                <?php endif; ?>
+            </form>
+        </div>
     </div>
 </main>
+<?php
+require_once('elements/footer.php');
