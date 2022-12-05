@@ -7,7 +7,7 @@ require_once('elements/header.php');
 
 <main>
     <div class="hero">
-        <h2 id="index-title" >Bonjour <?= isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 'voyageur en herbe !'; ?></h2>
+        <h2 id="index-title" >Bonjour <?= isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 'voyageur en herbe'; ?> !</h2>
     </div>
 </main>
 <?php
