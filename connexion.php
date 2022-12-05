@@ -7,8 +7,8 @@ if (isset($_POST['submit'])) {
         require_once('functions/connect.php');
         require_once('functions/is_user_in_db.php');
     
-        $input_login = $_POST['login'];
-        $input_password = $_POST['password'];
+        $input_login = htmlspecialchars(trim($_POST['login']), ENT_QUOTES, "UTF-8");
+        $input_password = htmlspecialchars(trim($_POST['password']), ENT_QUOTES, "UTF-8");
     
         // test if user in db, from the required function
         $is_user_in_db = is_user_in_db($input_login, $id);
