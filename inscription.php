@@ -1,5 +1,10 @@
 <?php
-// session_start();
+session_start();
+
+if (isset($_SESSION['is_logged'])) {
+    header('Location: index.php');
+    die();
+}
 
 // $_SESSION['user_successfully_created'] = false;
 require_once('functions/connect.php');
